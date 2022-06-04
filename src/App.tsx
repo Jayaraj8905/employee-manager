@@ -1,13 +1,12 @@
 import React from "react";
 import {
-  Box,
+  AppBar,
   createTheme,
   CssBaseline,
-  Paper,
   ThemeProvider,
+  Toolbar,
   Typography,
 } from "@mui/material";
-import './App.css';
 import { appColors } from "./colorPalette";
 
 function App() {
@@ -72,22 +71,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        height="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Paper
-          elevation={3}
-          sx={{ padding: "1rem", backgroundColor: "secondary.light" }}
-        >
-          <Typography color="primary.dark" variant="h1">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Employee Manager
           </Typography>
-        </Paper>
-      </Box>
+        </Toolbar>
+      </AppBar>
     </ThemeProvider>
   );
 }
