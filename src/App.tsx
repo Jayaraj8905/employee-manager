@@ -1,13 +1,16 @@
 import React from "react";
 import {
-  AppBar,
   createTheme,
   CssBaseline,
   ThemeProvider,
-  Toolbar,
-  Typography,
 } from "@mui/material";
 import { appColors } from "./colorPalette";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { routes as appRoutes } from "./routes";
+import Layout from "./components/Layout";
+import AppHeader from "./components/NavBar";
+import NotFound from "./components/NotFound";
+
 
 function App() {
 
@@ -71,13 +74,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Employee Manager
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <BrowserRouter>
+        <AppHeader />
+        <Layout>
+          <Routes>
+            {appRoutes.map((route) => (
+              <Route
+                key={route.key}
+                path={route.path}
+                element={<route.component />}
+              />
+            ))}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
