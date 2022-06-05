@@ -5,13 +5,15 @@ export enum GENDER {
   MALE = "male",
   FEMALE = "female",
 }
-export interface Employee {
+export interface EmployeeForm {
+  firstName?: string;
+  lastName?: string;
+  emailAddress?: string;
+  phoneNumber?: number;
+  gender?: GENDER;
+}
+export interface Employee extends EmployeeForm {
   id: number;
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phoneNumber: number;
-  gender: GENDER;
 }
 
 export type EmployeeResponse = {
@@ -26,4 +28,24 @@ export async function fetchEmployees(): Promise<
   AxiosResponse<EmployeeResponse>
 > {
   return baseApi.get(`/employee`);
+}
+
+/**
+ * Create new employee
+ * @returns
+ */
+ export async function saveEmployee(employee: EmployeeForm): Promise<
+ AxiosResponse<EmployeeResponse>
+> {
+ return baseApi.post(`/employee`, employee);
+}
+
+/**
+ * Update employee
+ * @returns
+ */
+ export async function updateEmployee(employee: Employee): Promise<
+ AxiosResponse<EmployeeResponse>
+> {
+ return baseApi.put(`/employee`, employee);
 }

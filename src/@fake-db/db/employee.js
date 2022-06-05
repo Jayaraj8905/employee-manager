@@ -34,11 +34,17 @@ export const employees = [
       "gender": "male"
     }
 ]
-// alert('Fake db');
 export const employeePattern = new RegExp(`/*/employee`);
-console.debug(mock);
 mock.onGet('/employee').reply(({ data }) => {
   return [200, {
       list: employees
   }];
+});
+
+mock.onPost('/employee').reply(({ data }) => {
+  return [200, {}];
+});
+
+mock.onPut('/employee').reply(({ data }) => {
+  return [200, {}];
 });
