@@ -91,7 +91,7 @@ const FormEmployee = ({
             color="primary"
             variant="contained"
             disabled={submitting}
-            endIcon={submitting ? <CircularProgress size={20} /> : <SendIcon />}
+            endIcon={submitting ? <CircularProgress size={18} /> : <SendIcon />}
           >
             Submit
           </Button>

@@ -2,12 +2,10 @@ import React from "react";
 import {
   AppBar,
   Box,
-  Fab,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Add } from "@mui/icons-material";
 
 /**
  * 
@@ -25,11 +23,6 @@ const AppHeader = () => {
                     </Typography>
                 </Link>
             </Box>
-            <Link to="/employee/add">
-                <Fab>
-                    <Add />
-                </Fab>
-            </Link>
         </Toolbar>
         </AppBar>
     );
