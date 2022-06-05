@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { deleteEmployee, getEmployeesList, selectEmployeeList } from "./store/employee";
+import { deleteEmployee, selectEmployeeList, selectEmployeeListLoading } from "./store/employee";
 import { Delete, Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
@@ -14,21 +14,10 @@ const ListEmployee = () => {
   const navigate = useNavigate();
 
   const employees = useAppSelector(selectEmployeeList);
-
-  useEffect(() => {
-    dispatch(getEmployeesList());
-  }, [dispatch]);
+  const loading = useAppSelector(selectEmployeeListLoading);
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        backgroundColor: "background.default",
-        display: "flex",
-        flexDirection: "column",
-        p: 3,
-      }}
-    >
+    <Box>
       <Typography variant="subtitle1" mb={2}>Employee List</Typography>
       <TableContainer component={Paper}>
         <Table >
@@ -43,7 +32,9 @@ const ListEmployee = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees ? employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender}) => (
+            <>
+            {loading && <TableRow><TableCell colSpan={6}><Typography>Loading...</Typography></TableCell></TableRow>}
+            {employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender}) => (
               <TableRow
                 key={id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -62,7 +53,8 @@ const ListEmployee = () => {
                   }))}><Delete /></IconButton>
                 </TableCell>
               </TableRow>
-            )) : <Typography>Loading</Typography>}
+            ))}
+            </>
           </TableBody>
         </Table>
       </TableContainer>

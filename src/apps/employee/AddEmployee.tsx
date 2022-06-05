@@ -17,15 +17,7 @@ const AddEmployee = () => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        backgroundColor: "background.default",
-        display: "flex",
-        flexDirection: "column",
-        p: 3,
-      }}
-    >
+    <Box>
       <Typography variant="subtitle1" mb={2}>Add Employee</Typography>
       <FormEmployee submitForm={onSubmit} defaultValues={{
         gender: GENDER.MALE

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectEmployeeById, updateEmployee } from "./store/employee";
+import { selectEmployeeById, selectEmployeeListLoading, updateEmployee } from "./store/employee";
 import FormEmployee from "./components/FormEmployee";
 import { EmployeeForm } from "../../api/employee";
 
@@ -15,6 +15,7 @@ const EditEmployee = () => {
   const dispatch = useAppDispatch();
 
   const employee = useAppSelector((state) => selectEmployeeById(state, `${id}`));
+  const loading = useAppSelector(selectEmployeeListLoading);
 
   const onSubmit = (data: EmployeeForm) => {
     dispatch(updateEmployee({
@@ -23,19 +24,12 @@ const EditEmployee = () => {
     }));
   };
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        backgroundColor: "background.default",
-        display: "flex",
-        flexDirection: "column",
-        p: 3,
-      }}
-    >
+    <Box>
       <Typography variant="subtitle1" mb={2}>Add Employee</Typography>
-      <FormEmployee submitForm={onSubmit} defaultValues={{
+      {!loading ? <FormEmployee submitForm={onSubmit} defaultValues={{
         ...employee
-      }}/>
+      }}/> : <Typography>Loading</Typography>
+      }
     </Box>
   );
 };

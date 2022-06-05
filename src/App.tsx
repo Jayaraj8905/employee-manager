@@ -6,13 +6,12 @@ import {
 } from "@mui/material";
 import './@fake-db'
 import { appColors } from "./colorPalette";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { routes as appRoutes } from "./routes";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import AppHeader from "./components/NavBar";
-import NotFound from "./components/NotFound";
 import { Provider } from "react-redux";
 import store from "./store";
+import Employee from "./apps/employee";
 
 
 function App() {
@@ -82,14 +81,8 @@ function App() {
           <AppHeader />
           <Layout>
             <Routes>
-              {appRoutes.map((route) => (
-                <Route
-                  key={route.key}
-                  path={route.path}
-                  element={<route.component />}
-                />
-              ))}
-              <Route path="*" element={<NotFound />} />
+              <Route path="/employee/*" element={<Employee />}/>
+              <Route path="*" element={<Navigate to="/employee/list" replace />} />
             </Routes>
           </Layout>
         </BrowserRouter>
