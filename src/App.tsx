@@ -4,12 +4,15 @@ import {
   CssBaseline,
   ThemeProvider,
 } from "@mui/material";
+import './@fake-db'
 import { appColors } from "./colorPalette";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes as appRoutes } from "./routes";
 import Layout from "./components/Layout";
 import AppHeader from "./components/NavBar";
 import NotFound from "./components/NotFound";
+import { Provider } from "react-redux";
+import store from "./store";
 
 
 function App() {
@@ -72,24 +75,26 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <AppHeader />
-        <Layout>
-          <Routes>
-            {appRoutes.map((route) => (
-              <Route
-                key={route.key}
-                path={route.path}
-                element={<route.component />}
-              />
-            ))}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <AppHeader />
+          <Layout>
+            <Routes>
+              {appRoutes.map((route) => (
+                <Route
+                  key={route.key}
+                  path={route.path}
+                  element={<route.component />}
+                />
+              ))}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
