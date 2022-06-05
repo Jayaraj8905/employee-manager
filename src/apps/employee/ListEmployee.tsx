@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getEmployeesList, selectEmployeeList } from "./store/employee";
+import { Edit } from "@mui/icons-material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 /**
  *
@@ -9,6 +11,7 @@ import { getEmployeesList, selectEmployeeList } from "./store/employee";
  */
 const ListEmployee = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const employees = useAppSelector(selectEmployeeList);
 
@@ -40,19 +43,21 @@ const ListEmployee = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees ? employees.map((employee) => (
+            {employees ? employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender}) => (
               <TableRow
-                key={employee.id}
+                key={id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {employee.firstName}
+                  {firstName}
                 </TableCell>
-                <TableCell>{employee.lastName}</TableCell>
-                <TableCell>{employee.emailAddress}</TableCell>
-                <TableCell>{employee.phoneNumber}</TableCell>
-                <TableCell>{employee.gender}</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>{lastName}</TableCell>
+                <TableCell>{emailAddress}</TableCell>
+                <TableCell>{phoneNumber}</TableCell>
+                <TableCell>{gender}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => navigate(`/employee/edit/${id}`)}><Edit /></IconButton>
+                </TableCell>
               </TableRow>
             )) : <Typography>Loading</Typography>}
           </TableBody>

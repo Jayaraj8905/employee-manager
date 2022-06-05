@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, createEntityAdapter, createSelector } from '@reduxjs/toolkit';
-import { Employee, EmployeeForm, fetchEmployees, saveEmployee } from '../../../api/employee';
+import { Employee, EmployeeForm, fetchEmployees, saveEmployee, saveEmployeeById } from '../../../api/employee';
 
 type EmployeeState ={
   // The unique IDs of each item. Must be strings or numbers
@@ -33,10 +33,17 @@ export const getEmployeesList = createAsyncThunk('employee/list/fetch', async ()
   return response?.data || [];
 });
 
-// Thunk for create the employee
+// Thunk to create the employee
 export const createEmployee = createAsyncThunk('employee/list/create', async (employeeForm: EmployeeForm) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await saveEmployee(employeeForm);
+  return response?.data || {};
+});
+
+// Thunk to update the employee
+export const updateEmployee = createAsyncThunk('employee/list/update', async ({id, employee}: {id: string, employee: EmployeeForm}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const response = await saveEmployeeById(id, employee);
   return response?.data || {};
 });
 
@@ -47,7 +54,6 @@ const employeeSlice = createSlice({
     ...initialState
   }),
   reducers: {
-    updateEmployee: employeeAdapter.updateOne,
   },
   extraReducers(builder) {
     builder
@@ -65,21 +71,32 @@ const employeeSlice = createSlice({
       .addCase(createEmployee.pending, (state) => {
         state.submitting = true;
       })
-      .addCase(createEmployee.fulfilled, (state, payload) => {
+      .addCase(createEmployee.fulfilled, (state, { payload }) => {
         state.submitting = false;
-        console.debug(payload);
         employeeAdapter.addOne(state, payload)
       })
       .addCase(createEmployee.rejected, (state) => {
         state.submittingError = true;
         state.submitting = false;
       })
+      .addCase(updateEmployee.pending, (state) => {
+        state.submitting = true;
+      })
+      .addCase(updateEmployee.fulfilled, (state, { payload }) => {
+        state.submitting = false;
+        employeeAdapter.updateOne(state, {
+          id: payload.id,
+          changes: {
+            ...payload,
+          }
+        });
+      })
+      .addCase(updateEmployee.rejected, (state) => {
+        state.submittingError = true;
+        state.submitting = false;
+      })
   }
 });
-
-export const {
-  updateEmployee
-} = employeeSlice.actions
 
 export const { selectAll: selectEmployeeList,
   selectById: selectEmployeeById, selectEntities } =

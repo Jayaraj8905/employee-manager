@@ -47,10 +47,12 @@ mock.onPost('/employee').reply(({ data }) => {
     ...JSON.parse(data)
   };
   employees.push(newData);
-  
   return [200, newData];
 });
 
 mock.onPut('/employee').reply(({ data }) => {
-  return [200, {}];
+  const newData = JSON.parse(data);
+  const toUpdateIndex = employees.findIndex(employee => employee.id === newData.id);
+  employees.splice(toUpdateIndex, 1, newData);
+  return [200, employees[toUpdateIndex]];
 });

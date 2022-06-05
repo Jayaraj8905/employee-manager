@@ -44,7 +44,7 @@ export async function fetchEmployees(): Promise<
  * Update employee
  * @returns
  */
- export async function updateEmployee(employee: Employee): Promise<
+ export async function saveEmployeeById(id: string, employee: EmployeeForm): Promise<
  AxiosResponse<Employee>
 > {
  return baseApi.put(`/employee`, employee);
