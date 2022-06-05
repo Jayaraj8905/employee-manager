@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteEmployee, selectEmployeeList, selectEmployeeListLoading } from "../store/employee";
 import { Delete, Edit } from "@mui/icons-material";
@@ -35,7 +35,7 @@ const ListEmployee = () => {
           <TableBody>
             <>
             {loading && <TableSkeleton rowCount={5} colCount={6}/>}
-            {employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender}) => (
+            {employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender, deleting}) => (
               <TableRow
                 key={id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -51,7 +51,7 @@ const ListEmployee = () => {
                   <IconButton onClick={() => navigate(`/employee/edit/${id}`)}><Edit /></IconButton>
                   <IconButton onClick={() => dispatch(deleteEmployee({
                     id,
-                  }))}><Delete /></IconButton>
+                  }))} disabled={deleting}>{deleting ? <CircularProgress size={18}/> : <Delete />}</IconButton>
                 </TableCell>
               </TableRow>
             ))}

@@ -15,6 +15,7 @@ export interface EmployeeForm {
 }
 export interface Employee extends EmployeeForm {
   id: string;
+  deleting?: boolean;
 }
 
 export type EmployeeResponse = {

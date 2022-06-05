@@ -28,28 +28,24 @@ const employeeAdapter = createEntityAdapter<Employee>({
 
 // Thunk for fetching the employees
 export const getEmployeesList = createAsyncThunk('employee/list/fetch', async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await fetchEmployees();
   return response?.data || [];
 });
 
 // Thunk to create the employee
 export const createEmployee = createAsyncThunk('employee/list/create', async (employeeForm: EmployeeForm) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await saveEmployee(employeeForm);
   return response?.data || {};
 });
 
 // Thunk to update the employee
 export const updateEmployee = createAsyncThunk('employee/list/update', async ({id, employee}: {id: string, employee: EmployeeForm}) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await saveEmployeeById(id, employee);
   return response?.data || {};
 });
 
 // Thunk to delete the employee
 export const deleteEmployee = createAsyncThunk('employee/list/delete', async ({id}: {id: string}) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await deleteEmployeeById(id);
   return response?.data || {};
 });
@@ -101,6 +97,14 @@ const employeeSlice = createSlice({
       .addCase(updateEmployee.rejected, (state) => {
         state.submittingError = true;
         state.submitting = false;
+      })
+      .addCase(deleteEmployee.pending, (state, { meta: { arg: { id }} }) => {
+        employeeAdapter.updateOne(state, {
+          id,
+          changes: {
+            deleting: true
+          }
+        });
       })
       .addCase(deleteEmployee.fulfilled, (state, { meta: { arg: { id }} }) => {
         employeeAdapter.removeOne(state, id);
