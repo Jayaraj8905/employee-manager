@@ -13,7 +13,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Employee from "./apps/employee";
 
-
+// TODO: COMMENTS
+// TODO: CONFIRMATION FOR FORM CHANGES
 function App() {
 
   // define theme
@@ -71,6 +72,17 @@ function App() {
         disabled: appColors.black[30],
       },
     },
+    typography: {
+      body1: {
+        fontSize: '14px'
+      },
+      body2: {
+        fontSize: '14px'
+      },
+      button: {
+        textTransform: 'inherit'
+      }
+    }
   });
 
   return (
