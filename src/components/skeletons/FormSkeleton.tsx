@@ -5,7 +5,7 @@ const FormSkeleton = ({count=5}: {count?: number}) => {
   return (
     <Box display="flex" flexDirection="column">
       {Array.from(Array(count).keys()).map((rowKey) => (
-        <Box mb={2}>
+        <Box mb={2} key={rowKey}>
             <Skeleton variant="rectangular" height={40}/>
         </Box>
       ))}

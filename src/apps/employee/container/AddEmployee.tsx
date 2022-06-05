@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import FormEmployee from "../components/FormEmployee";
 import { EmployeeForm, GENDER } from "../../../api/employee";
-import { useAppDispatch } from "../../../store/hooks";
-import { createEmployee } from "../store/employee";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { createEmployee, selectEmployeeSubmitting } from "../store/employee";
+import { useNavigate } from "react-router-dom";
 
 /**
  * 
@@ -11,9 +12,18 @@ import { createEmployee } from "../store/employee";
  */
 const AddEmployee = () => {
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(selectEmployeeSubmitting);
+  const navigate = useNavigate();
 
-  const onSubmit = (data: EmployeeForm) => {
-    dispatch(createEmployee(data));
+  const onSubmit = async (data: EmployeeForm) => {
+    // Dispatch the callback action
+    try {
+      await dispatch(createEmployee(data)).unwrap();
+      navigate('/employee/list');
+    } catch (error) {
+      // Show error on failure
+      console.error('Error while creating employee', error);
+    }
   };
 
   return (
@@ -21,7 +31,7 @@ const AddEmployee = () => {
       <Typography variant="h6" mb={2}>Add Employee</Typography>
       <FormEmployee submitForm={onSubmit} defaultValues={{
         gender: GENDER.MALE
-      }}/>
+      }} submitting={loading}/>
     </Box>
   );
 };

@@ -122,4 +122,9 @@ export const selectEmployeeListLoading = createSelector(
   (employeeState: EmployeeState) => employeeState.loading,
 );
 
+export const selectEmployeeSubmitting = createSelector(
+  selectEmployeeListState,
+  (employeeState: EmployeeState) => employeeState.submitting,
+);
+
 export default employeeSlice.reducer;

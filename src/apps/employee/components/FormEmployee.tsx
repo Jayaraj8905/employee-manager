@@ -1,10 +1,14 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormInputText, FormInputRadio } from "../../../components/form-components";
+import {
+  FormInputText,
+  FormInputRadio
+} from "../../../components/form-components";
 import { EmployeeForm } from "../../../api/employee";
+import SendIcon from "@mui/icons-material/Send";
 
 interface IFormProps {
   defaultValues: EmployeeForm;
@@ -40,17 +44,18 @@ const schema = yup.object({
  *
  * Add Employee Page which used to show the add employee form
  */
-const FormEmployee = ({ defaultValues = {}, submitForm, submitting }: IFormProps) => {
-  const {
-    handleSubmit,
-    control,
-  } = useForm<EmployeeForm>({
+const FormEmployee = ({
+  defaultValues = {},
+  submitForm,
+  submitting = false,
+}: IFormProps) => {
+  const { handleSubmit, control } = useForm<EmployeeForm>({
     defaultValues: defaultValues,
     resolver: yupResolver(schema),
   });
   const onSubmit = (data: EmployeeForm) => submitForm(data);
 
-  return (  
+  return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box display="flex" flexDirection="column">
         <Box mb={2}>
@@ -81,7 +86,13 @@ const FormEmployee = ({ defaultValues = {}, submitForm, submitting }: IFormProps
           <FormInputRadio name={"gender"} control={control} label={"Gender"} />
         </Box>
         <Box display="flex" justifyContent="end">
-          <Button type="submit" color="primary" variant="contained">
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            disabled={submitting}
+            endIcon={submitting ? <CircularProgress size={20} /> : <SendIcon />}
+          >
             Submit
           </Button>
         </Box>
