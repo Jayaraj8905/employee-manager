@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, createEntityAdapter, createSelector } from '@reduxjs/toolkit';
-import { Employee, EmployeeForm, fetchEmployees, saveEmployee, saveEmployeeById } from '../../../api/employee';
+import { deleteEmployeeById, Employee, EmployeeForm, fetchEmployees, saveEmployee, saveEmployeeById } from '../../../api/employee';
 
 type EmployeeState ={
   // The unique IDs of each item. Must be strings or numbers
@@ -44,6 +44,13 @@ export const createEmployee = createAsyncThunk('employee/list/create', async (em
 export const updateEmployee = createAsyncThunk('employee/list/update', async ({id, employee}: {id: string, employee: EmployeeForm}) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const response = await saveEmployeeById(id, employee);
+  return response?.data || {};
+});
+
+// Thunk to delete the employee
+export const deleteEmployee = createAsyncThunk('employee/list/delete', async ({id}: {id: string}) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const response = await deleteEmployeeById(id);
   return response?.data || {};
 });
 
@@ -94,6 +101,9 @@ const employeeSlice = createSlice({
       .addCase(updateEmployee.rejected, (state) => {
         state.submittingError = true;
         state.submitting = false;
+      })
+      .addCase(deleteEmployee.fulfilled, (state, { meta: { arg: { id }} }) => {
+        employeeAdapter.removeOne(state, id);
       })
   }
 });

@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { baseApi } from "./base";
+import { APISTATUS } from "./constants";
 
 export enum GENDER {
   MALE = "male",
@@ -13,7 +14,7 @@ export interface EmployeeForm {
   gender?: GENDER;
 }
 export interface Employee extends EmployeeForm {
-  id: number;
+  id: string;
 }
 
 export type EmployeeResponse = {
@@ -48,4 +49,14 @@ export async function fetchEmployees(): Promise<
  AxiosResponse<Employee>
 > {
  return baseApi.put(`/employee`, employee);
+}
+
+/**
+ * Delete employee
+ * @returns
+ */
+ export async function deleteEmployeeById(id: string): Promise<
+ AxiosResponse<{statue: APISTATUS}>
+> {
+ return baseApi.delete(`/employee/${id}`);
 }

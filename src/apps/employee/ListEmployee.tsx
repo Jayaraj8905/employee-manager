@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getEmployeesList, selectEmployeeList } from "./store/employee";
-import { Edit } from "@mui/icons-material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { deleteEmployee, getEmployeesList, selectEmployeeList } from "./store/employee";
+import { Delete, Edit } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 /**
  *
@@ -57,6 +57,9 @@ const ListEmployee = () => {
                 <TableCell>{gender}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => navigate(`/employee/edit/${id}`)}><Edit /></IconButton>
+                  <IconButton onClick={() => dispatch(deleteEmployee({
+                    id,
+                  }))}><Delete /></IconButton>
                 </TableCell>
               </TableRow>
             )) : <Typography>Loading</Typography>}

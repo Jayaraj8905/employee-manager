@@ -3,38 +3,38 @@ import mock from '../mock';
 export const employees = [
     {
       "id": 1,
-      "firstName": "Jayaraj",
-      "lastName": "Kamaraj",
-      "emailAddress": "jayaraj8905@gmail.com",
-      "phoneNumber": "90853597",
+      "firstName": "Robert",
+      "lastName": "Charles",
+      "emailAddress": "roert5229@gmail.com",
+      "phoneNumber": "98971523",
       "gender": "male"
     },
     {
       "id": 2,
-      "firstName": "Jayaraj",
-      "lastName": "Kamaraj",
-      "emailAddress": "jayaraj8905@gmail.com",
-      "phoneNumber": "90853597",
+      "firstName": "Johnson",
+      "lastName": "Joseph",
+      "emailAddress": "jonndavid59@gmail.com",
+      "phoneNumber": "97759202",
       "gender": "male"
     },
     {
       "id": 3,
-      "firstName": "Jayaraj",
-      "lastName": "Kamaraj",
-      "emailAddress": "jayaraj8905@gmail.com",
-      "phoneNumber": "90853597",
-      "gender": "male"
+      "firstName": "Barbara",
+      "lastName": "Patricia",
+      "emailAddress": "marypat78@gmail.com",
+      "phoneNumber": "95547889",
+      "gender": "female"
     },
     {
       "id": 4,
-      "firstName": "Jayaraj",
-      "lastName": "Kamaraj",
-      "emailAddress": "jayaraj8905@gmail.com",
-      "phoneNumber": "90853597",
+      "firstName": "William",
+      "lastName": "Richards",
+      "emailAddress": "richardswilliam@gmail.com",
+      "phoneNumber": "90053597",
       "gender": "male"
     }
 ]
-export const employeePattern = new RegExp(`/*/employee`);
+
 mock.onGet('/employee').reply(({ data }) => {
   return [200, {
       list: employees
@@ -55,4 +55,14 @@ mock.onPut('/employee').reply(({ data }) => {
   const toUpdateIndex = employees.findIndex(employee => employee.id === newData.id);
   employees.splice(toUpdateIndex, 1, newData);
   return [200, employees[toUpdateIndex]];
+});
+
+export const deleteEmployeePattern = new RegExp(`/employee/*/`);
+mock.onDelete(deleteEmployeePattern).reply(({ url }) => {
+  const id = url.split('/')[2];
+  const toDeleteIndex = employees.findIndex(employee => employee.id === id);
+  employees.splice(toDeleteIndex, 1);
+  return [200, {
+    status: 'SUCCESS'
+  }];
 });
