@@ -71,10 +71,10 @@ const ListEmployee = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Email Address</TableCell>
-              <TableCell>Phone Number</TableCell>
+              <TableCell>First name</TableCell>
+              <TableCell>Last name</TableCell>
+              <TableCell>Email address</TableCell>
+              <TableCell>Phone number</TableCell>
               <TableCell>Gender</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
