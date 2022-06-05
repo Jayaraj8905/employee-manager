@@ -1,6 +1,10 @@
 import { Box, Skeleton } from "@mui/material";
 import React from "react";
 
+/**
+ * 
+ * Form Skeleton
+ */
 const FormSkeleton = ({count=5}: {count?: number}) => {
   return (
     <Box display="flex" flexDirection="column">

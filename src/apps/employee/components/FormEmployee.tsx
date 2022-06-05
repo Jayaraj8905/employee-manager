@@ -42,7 +42,7 @@ const schema = yup.object({
 });
 /**
  *
- * Add Employee Page which used to show the add employee form
+ * Employee Page form which will show the form to add or update the employee record
  */
 const FormEmployee = ({
   defaultValues = {},

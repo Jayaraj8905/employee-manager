@@ -87,6 +87,7 @@ const employeeSlice = createSlice({
       })
       .addCase(updateEmployee.fulfilled, (state, { payload }) => {
         state.submitting = false;
+        // Update the employee using the adapter
         employeeAdapter.updateOne(state, {
           id: payload.id,
           changes: {
@@ -99,6 +100,7 @@ const employeeSlice = createSlice({
         state.submitting = false;
       })
       .addCase(deleteEmployee.pending, (state, { meta: { arg: { id }} }) => {
+        // Set the deleting flag to true for the employee during deletion
         employeeAdapter.updateOne(state, {
           id,
           changes: {

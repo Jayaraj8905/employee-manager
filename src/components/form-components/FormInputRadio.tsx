@@ -20,6 +20,10 @@ const options = [
   },
 ];
 
+/**
+ * 
+ * Form Input Text component used to render the radio input field with react hook form
+ */
 const FormInputRadio: React.FC<FormInputProps> = ({
   name,
   control,

@@ -9,6 +9,10 @@ import {
 } from "@mui/material";
 import React from "react";
 
+/**
+ * 
+ * Dialog Box to delete the employee
+ */
 const DeleteEmployee = ({ id, confirm }: { id: string, confirm: (id: string) => void}) => {
   const [open, setOpen] = React.useState(true);
 
@@ -29,6 +33,7 @@ const DeleteEmployee = ({ id, confirm }: { id: string, confirm: (id: string) => 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          {/* Pass the id upon confirmation */}
           <Button onClick={() => confirm(id)}>Yes</Button>
           <Button onClick={() => confirm('')}>No</Button>
         </DialogActions>

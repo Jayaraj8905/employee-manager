@@ -13,11 +13,10 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Employee from "./apps/employee";
 
-// TODO: COMMENTS
 // TODO: CONFIRMATION FOR FORM CHANGES
 function App() {
 
-  // define theme
+  // Theme definition
   const theme = createTheme({
     palette: {
       background: {
@@ -94,6 +93,7 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/employee/*" element={<Employee />}/>
+              {/* Always route to the employee list, if route doen't exist */}
               <Route path="*" element={<Navigate to="/employee/list" replace />} />
             </Routes>
           </Layout>
