@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectEmployeeById, selectEmployeeListLoading, updateEmployee } from "./store/employee";
-import FormEmployee from "./components/FormEmployee";
-import { EmployeeForm } from "../../api/employee";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { selectEmployeeById, selectEmployeeListLoading, updateEmployee } from "../store/employee";
+import FormEmployee from "../components/FormEmployee";
+import { EmployeeForm } from "../../../api/employee";
 
 /**
  * 

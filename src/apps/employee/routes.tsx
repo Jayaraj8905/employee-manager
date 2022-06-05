@@ -1,8 +1,8 @@
 
 import {FC} from "react";
-import ListEmployee from "./ListEmployee";
-import AddEmployee from "./AddEmployee";
-import EditEmployee from "./Editmployee";
+import ListEmployee from "./container/ListEmployee";
+import AddEmployee from "./container/AddEmployee";
+import EditEmployee from "./container/Editmployee";
 
 // interface
 interface Route {

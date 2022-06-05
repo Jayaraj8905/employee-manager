@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { deleteEmployee, selectEmployeeList, selectEmployeeListLoading } from "./store/employee";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { deleteEmployee, selectEmployeeList, selectEmployeeListLoading } from "../store/employee";
 import { Delete, Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 

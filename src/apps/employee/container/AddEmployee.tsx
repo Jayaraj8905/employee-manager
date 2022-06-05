@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import FormEmployee from "./components/FormEmployee";
-import { EmployeeForm, GENDER } from "../../api/employee";
-import { useAppDispatch } from "../../store/hooks";
-import { createEmployee } from "./store/employee";
+import FormEmployee from "../components/FormEmployee";
+import { EmployeeForm, GENDER } from "../../../api/employee";
+import { useAppDispatch } from "../../../store/hooks";
+import { createEmployee } from "../store/employee";
 
 /**
  * 
