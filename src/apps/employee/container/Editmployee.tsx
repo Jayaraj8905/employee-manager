@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { selectEmployeeById, selectEmployeeListLoading, selectEmployeeSubmitting, updateEmployee } from "../store/employee";
@@ -35,11 +35,15 @@ const EditEmployee = () => {
   };
   return (
     <Box>
-      <Typography variant="h6" mb={2}>Edit Employee</Typography>
-      {!loading ? <FormEmployee submitForm={onSubmit} defaultValues={{
-        ...employee
-      }} submitting={updating}/> : <FormSkeleton />
-      }
+      <Grid container>
+        <Grid item xs={12} md={8} lg={6}>
+          <Typography variant="h6" mb={2}>Edit Employee</Typography>
+          {!loading ? <FormEmployee submitForm={onSubmit} defaultValues={{
+            ...employee
+          }} submitting={updating}/> : <FormSkeleton />
+          }
+        </Grid>
+      </Grid>
     </Box>
   );
 };

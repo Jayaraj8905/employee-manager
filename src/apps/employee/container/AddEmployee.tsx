@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import FormEmployee from "../components/FormEmployee";
 import { EmployeeForm, GENDER } from "../../../api/employee";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -28,10 +28,14 @@ const AddEmployee = () => {
 
   return (
     <Box>
-      <Typography variant="h6" mb={2}>Add Employee</Typography>
-      <FormEmployee submitForm={onSubmit} defaultValues={{
-        gender: GENDER.MALE
-      }} submitting={loading}/>
+      <Grid container>
+        <Grid item xs={12} md={8} lg={6}>
+          <Typography variant="h6" mb={2}>Add Employee</Typography>
+          <FormEmployee submitForm={onSubmit} defaultValues={{
+            gender: GENDER.MALE
+          }} submitting={loading}/>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
