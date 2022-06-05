@@ -2,15 +2,18 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import FormEmployee from "./components/FormEmployee";
 import { EmployeeForm, GENDER } from "../../api/employee";
+import { useAppDispatch } from "../../store/hooks";
+import { createEmployee } from "./store/employee";
 
 /**
  * 
  * Add Employee Page which used to show the add employee form
  */
 const AddEmployee = () => {
+  const dispatch = useAppDispatch();
+
   const onSubmit = (data: EmployeeForm) => {
-    console.debug('Form Submitted');
-    console.debug(data);
+    dispatch(createEmployee(data));
   };
 
   return (

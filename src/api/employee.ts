@@ -35,7 +35,7 @@ export async function fetchEmployees(): Promise<
  * @returns
  */
  export async function saveEmployee(employee: EmployeeForm): Promise<
- AxiosResponse<EmployeeResponse>
+ AxiosResponse<Employee>
 > {
  return baseApi.post(`/employee`, employee);
 }
@@ -45,7 +45,7 @@ export async function fetchEmployees(): Promise<
  * @returns
  */
  export async function updateEmployee(employee: Employee): Promise<
- AxiosResponse<EmployeeResponse>
+ AxiosResponse<Employee>
 > {
  return baseApi.put(`/employee`, employee);
 }

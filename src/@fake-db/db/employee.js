@@ -42,7 +42,13 @@ mock.onGet('/employee').reply(({ data }) => {
 });
 
 mock.onPost('/employee').reply(({ data }) => {
-  return [200, {}];
+  const newData = {
+    id: new Date().getTime(),
+    ...JSON.parse(data)
+  };
+  employees.push(newData);
+  
+  return [200, newData];
 });
 
 mock.onPut('/employee').reply(({ data }) => {
