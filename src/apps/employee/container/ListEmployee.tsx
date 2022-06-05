@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   CircularProgress,
@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { TableSkeleton } from "../../../components/skeletons";
 import { Link } from "react-router-dom";
 import { Add } from "@mui/icons-material";
+import DeleteEmployee from "../components/DeleteEmployee";
 
 /**
  *
@@ -32,16 +33,34 @@ import { Add } from "@mui/icons-material";
 const ListEmployee = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [deleteId, setDeleteId] = useState("");
 
   const employees = useAppSelector(selectEmployeeList);
   const loading = useAppSelector(selectEmployeeListLoading);
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" mb={1} alignItems="center">
-        <Typography variant="h6">
-          Employee List
-        </Typography>
+      {deleteId && (
+        <DeleteEmployee
+          id={deleteId}
+          confirm={(id: string) => {
+            setDeleteId(""); // Reset the deleteid
+            // If id is there, means user confirmed the delete
+            id && dispatch(
+              deleteEmployee({
+                id,
+              })
+            )
+          }}
+        />
+      )}
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        mb={1}
+        alignItems="center"
+      >
+        <Typography variant="h6">Employee List</Typography>
         <Link to="/employee/add">
           <Fab variant="circular" color="primary" size="small">
             <Add />
@@ -94,11 +113,7 @@ const ListEmployee = () => {
                       </IconButton>
                       <IconButton
                         onClick={() =>
-                          dispatch(
-                            deleteEmployee({
-                              id,
-                            })
-                          )
+                          setDeleteId(id)
                         }
                         disabled={deleting}
                       >
