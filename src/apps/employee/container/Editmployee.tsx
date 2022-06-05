@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { selectEmployeeById, selectEmployeeListLoading, updateEmployee } from "../store/employee";
 import FormEmployee from "../components/FormEmployee";
 import { EmployeeForm } from "../../../api/employee";
+import { FormSkeleton } from "../../../components/skeletons";
 
 /**
  * 
@@ -25,10 +26,10 @@ const EditEmployee = () => {
   };
   return (
     <Box>
-      <Typography variant="subtitle1" mb={2}>Add Employee</Typography>
+      <Typography variant="h6" mb={2}>Edit Employee</Typography>
       {!loading ? <FormEmployee submitForm={onSubmit} defaultValues={{
         ...employee
-      }}/> : <Typography>Loading</Typography>
+      }}/> : <FormSkeleton />
       }
     </Box>
   );

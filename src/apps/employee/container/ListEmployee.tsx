@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteEmployee, selectEmployeeList, selectEmployeeListLoading } from "../store/employee";
 import { Delete, Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { TableSkeleton } from "../../../components/skeletons";
 
 /**
  *
@@ -18,7 +19,7 @@ const ListEmployee = () => {
 
   return (
     <Box>
-      <Typography variant="subtitle1" mb={2}>Employee List</Typography>
+      <Typography variant="h6" mb={2}>Employee List</Typography>
       <TableContainer component={Paper}>
         <Table >
           <TableHead>
@@ -33,7 +34,7 @@ const ListEmployee = () => {
           </TableHead>
           <TableBody>
             <>
-            {loading && <TableRow><TableCell colSpan={6}><Typography>Loading...</Typography></TableCell></TableRow>}
+            {loading && <TableSkeleton rowCount={5} colCount={6}/>}
             {employees.map(({id, firstName, lastName, emailAddress, phoneNumber, gender}) => (
               <TableRow
                 key={id}
@@ -45,7 +46,7 @@ const ListEmployee = () => {
                 <TableCell>{lastName}</TableCell>
                 <TableCell>{emailAddress}</TableCell>
                 <TableCell>{phoneNumber}</TableCell>
-                <TableCell>{gender}</TableCell>
+                <TableCell sx={{textTransform: 'capitalize'}}>{gender}</TableCell>
                 <TableCell>
                   <IconButton onClick={() => navigate(`/employee/edit/${id}`)}><Edit /></IconButton>
                   <IconButton onClick={() => dispatch(deleteEmployee({

@@ -20,7 +20,7 @@ const options = [
   },
 ];
 
-export const FormInputRadio: React.FC<FormInputProps> = ({
+const FormInputRadio: React.FC<FormInputProps> = ({
   name,
   control,
   label,
@@ -55,3 +55,5 @@ export const FormInputRadio: React.FC<FormInputProps> = ({
     </FormControl>
   );
 };
+
+export default React.memo(FormInputRadio);

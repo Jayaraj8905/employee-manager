@@ -18,7 +18,7 @@ const AddEmployee = () => {
 
   return (
     <Box>
-      <Typography variant="subtitle1" mb={2}>Add Employee</Typography>
+      <Typography variant="h6" mb={2}>Add Employee</Typography>
       <FormEmployee submitForm={onSubmit} defaultValues={{
         gender: GENDER.MALE
       }}/>

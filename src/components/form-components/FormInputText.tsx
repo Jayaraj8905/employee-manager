@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { FormInputProps } from "./FormInputProps";
 
-export const FormInputText = ({ name, control, label }: FormInputProps) => {
+const FormInputText = ({ name, control, label }: FormInputProps) => {
   return (
     <Controller
       name={name}
@@ -27,3 +27,5 @@ export const FormInputText = ({ name, control, label }: FormInputProps) => {
     />
   );
 };
+
+export default React.memo(FormInputText);

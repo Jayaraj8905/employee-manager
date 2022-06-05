@@ -3,8 +3,7 @@ import { Box, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormInputText } from "../../../components/form-components/FormInputText";
-import { FormInputRadio } from "../../../components/form-components/FormInputRadio";
+import { FormInputText, FormInputRadio } from "../../../components/form-components";
 import { EmployeeForm } from "../../../api/employee";
 
 interface IFormProps {
@@ -81,9 +80,11 @@ const FormEmployee = ({ defaultValues = {}, submitForm, submitting }: IFormProps
         <Box mb={2}>
           <FormInputRadio name={"gender"} control={control} label={"Gender"} />
         </Box>
-        <Button type="submit" color="primary" variant="contained">
-          Submit
-        </Button>
+        <Box display="flex" justifyContent="end">
+          <Button type="submit" color="primary" variant="contained">
+            Submit
+          </Button>
+        </Box>
       </Box>
     </form>
   );
